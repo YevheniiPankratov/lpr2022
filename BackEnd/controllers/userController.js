@@ -29,18 +29,27 @@ module.exports.registration = async (req, res, next) => {
   return res.json({ token });
 };
 
-module.exports.login = async (req, res) => {
+module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ where: { email } });
+
   if (!user) {
-    return next(ApiError.internal("User with this email not found!"))
+    return next(ApiError.internal("User with this email not found!"));
   }
+
+  let comparePasswordWithDB = bcrypt.compareSync(password, user.password);
+
+  if (!comparePasswordWithDB) {
+    return next(ApiError.badRequest("You entered the wrong password!"));
+  }
+
+  const token = generateJWT(user.id, user.email, user.role);
+
+  return res.json({ token });
 };
 
-module.exports.checkUser = async (req, res, next) => {
-  const { id } = req.query;
-  if (!id) {
-    return next(ApiError.badRequest("Don't have ID"));
-  }
-  res.json(id);
+module.exports.checkUser = async (req, res) => {
+  const { id, email, role } = req.user;
+  const token = generateJWT(id, email, role);
+  return res.json({ token });
 };
