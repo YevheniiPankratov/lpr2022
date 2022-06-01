@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import RoutesList from '../../Layout/RoutesList';
 
 export const HomePage: React.FC = () => {
-  return <div>Hello</div>;
+  return <Link to={RoutesList.UserAccount}>Go to UserPage</Link>;
 };

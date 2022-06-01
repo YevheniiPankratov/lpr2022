@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
 
   footer {
     display: flex;
-    align-items: column;
+    align-items: center;
     justify-content: center;
     flex: 0 0 auto;
     padding: 10px;
@@ -43,6 +43,23 @@ const GlobalStyle = createGlobalStyle`
     font-size: 20px;
     margin: 0 15px;
     font-weight: 700;
+  }
+
+  .authLink {
+    &:hover {
+      color: #55489c;
+    }
+  }
+
+  .notFound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20vh;
+    p {
+      margin-top: 10px;
+    }
   }
 
 `;
