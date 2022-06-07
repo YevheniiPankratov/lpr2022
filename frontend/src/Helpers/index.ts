@@ -5,7 +5,8 @@ export type {
   IUserForSignIn,
   IUserStore,
   IToken,
-  IAppStore
+  IAppStore,
+  ServerError
 } from './commonInterfaces';
 export { initialUser } from './commonInterfaces';
 export {

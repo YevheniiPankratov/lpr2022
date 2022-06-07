@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
+import axios, { AxiosError } from 'axios';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -20,7 +21,8 @@ import {
   signUpValidationSchema,
   IUser,
   initialUser,
-  localStorageSetItem
+  localStorageSetItem,
+  ServerError
 } from '../../Helpers';
 import { CustomAlert } from '../../Components';
 
@@ -40,21 +42,25 @@ export const SignUpPage: React.FC = () => {
   const signUpUserHandler = async (values: IUser) => {
     try {
       const { firstName, lastName, email, password, role } = values;
-      const resonse: unknown = await signUp({
+      const userData = (await signUp({
         email,
         password,
         firstName,
         lastName,
         role
-      });
-      const userData: IUser = resonse as IUser;
+      })) as unknown as IUser;
       localStorageSetItem('user', JSON.stringify(userData));
       setIsAuth(true);
       setUser(userData);
       history(UserAccount);
       setAlert(false);
-    } catch (error: any) {
-      setMsgAlert(error.response.data.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<ServerError>;
+        if (serverError && serverError.response) {
+          setMsgAlert(serverError.response.data.message);
+        }
+      } else setMsgAlert('Unexpected error');
       setAlert(true);
     }
   };

@@ -49,3 +49,5 @@ export const initialUser = {
   password: '',
   role: 'USER'
 };
+
+export type ServerError = { message: string };

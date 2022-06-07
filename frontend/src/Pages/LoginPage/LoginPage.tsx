@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
+import axios, { AxiosError } from 'axios';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -21,7 +22,8 @@ import {
   loginValidationSchema,
   IUserForSignIn,
   IUser,
-  localStorageSetItem
+  localStorageSetItem,
+  ServerError
 } from '../../Helpers';
 
 const theme = createTheme();
@@ -39,15 +41,19 @@ export const LoginPage: React.FC = () => {
 
   const loginUserHandler = async (values: IUserForSignIn) => {
     try {
-      const resonse: unknown = await loginUser(values);
-      const userData: IUser = resonse as IUser;
+      const userData = (await loginUser(values)) as unknown as IUser;
       localStorageSetItem('user', JSON.stringify(userData));
       setIsAuth(true);
       setUser(userData);
       setAlert(false);
       history(UserAccount);
-    } catch (error: any) {
-      setMsgAlert(error.response.data.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<ServerError>;
+        if (serverError && serverError.response) {
+          setMsgAlert(serverError.response.data.message);
+        }
+      } else setMsgAlert('Unexpected error');
       setAlert(true);
     }
   };
