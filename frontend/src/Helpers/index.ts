@@ -1,17 +1,24 @@
 export { renderLoginFields, renderSignUpFields } from './AuthRenderInputs';
-export { AuthTextField } from './AuthTextField';
+export { ValidationTextField } from './ValidationTextField';
 export type {
   IUser,
   IUserForSignIn,
   IUserStore,
   IToken,
   IAppStore,
-  ServerError
+  ServerError,
+  IChangeInfoModal,
+  IModalEditProfileChildren,
+  IUpdateUserProfile,
+  bodyTypeForPuttingImgToS3Bucket,
+  IS3BucketUrl,
+  IimageFile
 } from './commonInterfaces';
 export { initialUser } from './commonInterfaces';
 export {
   loginValidationSchema,
-  signUpValidationSchema
+  signUpValidationSchema,
+  UpdateUserProfileValidationSchema
 } from './validationSchemes';
 export {
   localStorageSetItem,

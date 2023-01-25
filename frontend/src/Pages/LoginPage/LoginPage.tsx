@@ -104,15 +104,24 @@ export const LoginPage: React.FC = () => {
               }}
             >
               <Form>
-                {renderLoginFields}
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '550px'
+                  }}
                 >
-                  Login
-                </Button>
+                  {renderLoginFields}
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Login
+                  </Button>
+                </Box>
+
                 <CustomAlert severity="error" msg={msgAlert} />
                 <Grid container>
                   <Grid item>

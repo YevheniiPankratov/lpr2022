@@ -14,3 +14,14 @@ export const Main = styled.main`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const UserPageDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 95%;
+  background-color: #fbfbfb;
+  margin-top: 15px;
+  border-top: 2px solid black;
+  padding: 20px;
+`;

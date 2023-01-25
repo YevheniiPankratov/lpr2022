@@ -42,13 +42,14 @@
     "import/no-unresolved": 0,
     "comma-dangle": 0,
     "react/function-component-definition": 0,
-    "linebreak-style": ["error", "windows"],
+    // "linebreak-style": ["error", "windows"],
     "arrow-body-style": 0,
     "import/prefer-default-export": 0,
     "camelcase": "off",
     "object-curly-newline": "off",
     "implicit-arrow-linebreak": "off",
     "react/jsx-wrap-multilines": "off",
-    "no-param-reassign": [2, { "props": false }]
+    "no-param-reassign": [2, { "props": false }],
+    "react/jsx-one-expression-per-line" : "off"
   }
 }

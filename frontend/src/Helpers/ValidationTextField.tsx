@@ -3,7 +3,9 @@ import React from 'react';
 import { FieldProps, getIn } from 'formik';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 
-export const AuthTextField: React.FC<FieldProps & TextFieldProps> = (props) => {
+export const ValidationTextField: React.FC<FieldProps & TextFieldProps> = (
+  props
+) => {
   const { error, helperText, field, form, ...rest } = props;
 
   const isTouched = getIn(form.touched, field.name);

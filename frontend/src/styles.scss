@@ -1,0 +1,49 @@
+body {
+    font-size: 18px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.user-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.user-block {
+    display: flex;
+    flex-direction: row;
+    .user-block-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .user-block-avatar {
+        width: 350px;
+        margin-left: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .form-div-image {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .user-image {
+            margin-top: 20px;
+            img {
+                height: 350px;
+                width: 350px;
+            }
+        }
+        .help-text-avatar {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    }
+}

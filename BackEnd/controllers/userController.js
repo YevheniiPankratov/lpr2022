@@ -36,7 +36,7 @@ module.exports.registration = async (req, res, next) => {
     user.email,
     user.role,
     user.firstName,
-    user.lastName,
+    user.lastName
   );
   return res.json({ token });
 };
@@ -60,8 +60,34 @@ module.exports.login = async (req, res, next) => {
     user.email,
     user.role,
     user.firstName,
-    user.lastName,
+    user.lastName
   );
 
   return res.json({ token });
+};
+
+module.exports.updateUserProfile = async (req, res, next) => {
+  const { email } = req.body;
+  const user = await User.findOne({ where: { email } });
+
+  if (user) {
+    user.firstName = req.body?.firstName || user.firstName;
+    user.lastName = req.body?.lastName || user.lastName;
+    if (req.body?.password) {
+      const hashPassword = await bcrypt.hash(req.body.password, 4);
+      user.password = hashPassword || user.password;
+    }
+
+    const updatedUser = await user.save();
+    const token = generateJWT(
+      updatedUser.id,
+      updatedUser.email,
+      updatedUser.role,
+      updatedUser.firstName,
+      updatedUser.lastName
+    );
+
+    return res.json({ token });
+  }
+  return next(ApiError.internal('User with this email not exists!'));
 };

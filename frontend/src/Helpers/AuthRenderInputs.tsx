@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'formik';
 import Grid from '@mui/material/Grid';
-import { AuthTextField } from './AuthTextField';
+import { ValidationTextField } from './ValidationTextField';
 import { IAuthField } from './commonInterfaces';
 
 const loginFields: IAuthField[] = [
@@ -58,7 +58,7 @@ export const renderLoginFields = loginFields.map((item: IAuthField) => {
       margin="normal"
       autoFocus={autoFocus}
       fullWidth
-      component={AuthTextField}
+      component={ValidationTextField}
     />
   );
 });
@@ -73,7 +73,7 @@ export const renderSignUpFields = signUpFields.map((item: IAuthField) => {
         label={label}
         autoFocus={autoFocus}
         fullWidth
-        component={AuthTextField}
+        component={ValidationTextField}
       />
     </Grid>
   );

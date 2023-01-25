@@ -4,14 +4,15 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
 
 import { userStore } from '../../Stores/UserStore';
-import { StyleToolbar } from '../index';
+import { StyleToolbar, MiniAvatar } from '../index';
 import RoutesList from '../../Layout/RoutesList';
 import { initialUser } from '../../Helpers';
 
 export const Header = () => {
-  const { Home, Login, SignUp } = RoutesList;
+  const { Home, Login, SignUp, UserAccount } = RoutesList;
   const [isAuth, setIsAuth, setUser] = userStore((state) => [
     state.isAuth,
     state.setIsAuth,
@@ -35,9 +36,19 @@ export const Header = () => {
           </Link>
           <Box component="div">
             {isAuth ? (
-              <Link to={Home} className="headerLink" onClick={signOut}>
-                Sign Out
-              </Link>
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+              >
+                <Link to={UserAccount}>
+                  <MiniAvatar />
+                </Link>
+                <Link to={Home} className="headerLink" onClick={signOut}>
+                  Sign Out
+                </Link>
+              </Stack>
             ) : (
               <>
                 <Link to={Login} className="headerLink">
